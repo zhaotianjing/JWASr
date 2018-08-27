@@ -57,7 +57,8 @@ JWASr::ran_julia("set_random(model,x2,G1);")
 ```{R}
 JWASr::assign("x3","x3")
 JWASr::ran_julia("outputMCMCsamples(model,x3)")
-JWASr::runMCMC(model, phenotypes,chain_length=5000,output_samples_frequency=100)
+out = JWASr::runMCMC(model, phenotypes,chain_length=5000,output_samples_frequency=100)
+out
 ```
 
  
