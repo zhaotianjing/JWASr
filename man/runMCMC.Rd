@@ -4,8 +4,9 @@
 \alias{runMCMC}
 \title{Run the MCMC model}
 \usage{
-runMCMC(model, mydata, chain_length = 1000,
-  output_samples_frequency = 0, outputEBV = 0)
+runMCMC(model, mydata, estimatePi = 0, chain_length = 1000,
+  methods = "conventional (no markers)", output_samples_frequency = 0,
+  outputEBV = 0)
 }
 \arguments{
 \item{model}{the model built before}
