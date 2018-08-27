@@ -2,7 +2,7 @@
 title: "1.1_Conventional_Linear_Mixed_Model"
 author: "Tianjing Zhao"
 date: "August 26, 2018"
-output: html_document
+output: rmarkdown::github_document
 ---
 
 ```{r setup, include=FALSE}
