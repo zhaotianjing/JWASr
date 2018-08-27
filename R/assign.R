@@ -1,8 +1,12 @@
-#'  assign
+#' assign
+#' @param object object for assign
+#' @param value value for assign
 #'
+#'
+#' @examples
+#' assign("R",1.0)
 #'
 #' @export
-#'
 
 assign = function(object, value){
 
