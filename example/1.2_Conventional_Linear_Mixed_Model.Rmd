@@ -2,7 +2,7 @@
 title: "1.2_Conventional_Linear_Mixed_Model"
 author: "Tianjing Zhao"
 date: "August 26, 2018"
-output: html_document
+output: rmarkdown::github_document
 ---
 
 ```{r setup, include=FALSE}
@@ -11,6 +11,51 @@ knitr::opts_chunk$set(echo = TRUE)
 
 
 
-```{R}
+### Install package
+```{r}
+library(devtools)
+install_github("zhaotianjing/JWASr")
+```
+### set up (windows user)
+```{r}
+path_libjulia = "C:/Users/ztjsw/AppData/Local/Julia-0.7.0/bin/libjulia.dll"
+JWASr::jwasr_setup(path_libjulia)
+```
 
+### build model
+```{r}
+model_equation ="y1 = intercept + x1 + x3
+                  y2 = intercept + x1 + x2 + x3
+                  y3 = intercept + x1 + x1*x3 + x2"
+R = diag(3)
+
+model = JWASr::build_model(model_equation,R)
+```
+
+
+### data
+```{r}
+phenotypes = JWASr::phenotypes
+phenotypes
+```
+
+### set covariate
+```{r}
+JWASr::assign("x1","x1")
+JWASr::ran_julia("set_covariate(model,x1)")
+```
+
+### set random
+```{r}
+G1 = diag(2)
+JWASr::assign("x2","x2")
+JWASr::assign("G1",G1)
+JWASr::ran_julia("set_random(model,x2,G1);")
+```
+
+
+### run
+```{R}
+JWASr::ran_julia("outputMCMCsamples(model,x1)")
+JWASr::runMCMC(model, phenotypes,chain_length=5000,output_samples_frequency=100)
 ```
