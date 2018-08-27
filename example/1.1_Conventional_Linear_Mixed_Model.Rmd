@@ -45,13 +45,24 @@ JWASr::ran_julia("set_covariate(model,x1);")
 ```
 
 
+### set random
+```{r}
+JWASr::assign("G1",1.0)
+JWASr::assign("x2","x2")
+JWASr::ran_julia("set_random(model,x2,G1);")
+```
 
+### run
+```{R}
+JWASr::assign("x3","x3")
+JWASr::ran_julia("outputMCMCsamples(model,x3)")
+out = JWASr::runMCMC(model, phenotypes,chain_length=5000,output_samples_frequency=100)
+```
 
-
-
-
-
-
+### result
+```{r}
+out
+```
 
 
 
