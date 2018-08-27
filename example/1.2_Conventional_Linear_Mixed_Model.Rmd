@@ -19,8 +19,10 @@ install_github("zhaotianjing/JWASr")
 ### set up (windows user)
 ```{r}
 path_libjulia = "C:/Users/ztjsw/AppData/Local/Julia-0.7.0/bin/libjulia.dll"
-JWASr::jwasr_setup(path_libjulia)
+JWASr::jwasr_setup_win(path_libjulia)
 ```
+For Mac user, run one line "JWASr::jwasr_setup()" to setup.
+
 
 ### build model
 ```{r}

@@ -11,7 +11,7 @@
 #'
 #' @export
 
-jwasr_setup <- function (path_libjulia){
+jwasr_setup_win <- function (path_libjulia){
   JuliaCall:::juliacall_initialize(path_libjulia)
   julia = JuliaCall::julia_setup()
   JuliaCall::julia_library("JWAS")
@@ -19,3 +19,8 @@ jwasr_setup <- function (path_libjulia){
 }
 
 
+jwasr_setup <- function (){
+  julia = JuliaCall::julia_setup()
+  JuliaCall::julia_library("JWAS")
+  JuliaCall::julia_library("CSV")
+}
