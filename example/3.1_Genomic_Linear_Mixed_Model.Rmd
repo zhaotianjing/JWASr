@@ -1,0 +1,19 @@
+---
+title: "3.1_Genomic_Linear_Mixed_Model"
+author: "Tianjing Zhao"
+date: "August 27, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+```{r}
+
+
+
+```
+
