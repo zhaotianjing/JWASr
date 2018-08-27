@@ -1,0 +1,33 @@
+---
+title: "2.2_Linear_Additive_Genetic_Model"
+author: "Tianjing Zhao"
+date: "August 27, 2018"
+output: rmarkdown::github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Install package
+```{r}
+library(devtools)
+install_github("zhaotianjing/JWASr")
+```
+### set up (windows user)
+```{r}
+path_libjulia = "C:/Users/ztjsw/AppData/Local/Julia-0.7.0/bin/libjulia.dll"
+JWASr::jwasr_setup_win(path_libjulia)
+```
+For Mac user, run one line "JWASr::jwasr_setup()" to setup.
+
+
+### build model
+```{r}
+
+
+```
+
+
+
+

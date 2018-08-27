@@ -31,7 +31,7 @@ model_equation ="y1 = intercept + x1 + x3
                   y3 = intercept + x1 + x1*x3 + x2"
 R = diag(3)
 
-model = JWASr::build_model(model_equation,R)
+model = JWASr::build_model(model_equation,R)   #build "model" in Julia
 ```
 
 
