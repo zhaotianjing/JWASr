@@ -4,7 +4,7 @@
 \alias{runMCMC}
 \title{Run the MCMC model}
 \usage{
-runMCMC(model, mydata, estimatePi = FALSE, chain_length = 1000,
+runMCMC(data, estimatePi = FALSE, chain_length = 1000,
   methods = "conventional (no markers)", output_samples_frequency = 0,
   outputEBV = FALSE, single_step_analysis = FALSE, pedigree = FALSE)
 }

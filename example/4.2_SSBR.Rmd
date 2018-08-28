@@ -9,11 +9,7 @@ output: rmarkdown::github_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-### Install package
-```{r}
-library(devtools)
-install_github("zhaotianjing/JWASr")
-```
+
 
 ### set up (windows user)
 ```{r}
@@ -67,7 +63,7 @@ JWASr::add_genotypes(geno_path, G3)  #separator=',' is default
 
 ### run
 ```{r}
-out = JWASr::runMCMC(model, phenotypes, methods = "BayesC", estimatePi = TRUE, single_step_analysis = TRUE,
+out = JWASr::runMCMC(data = phenotypes, methods = "BayesC", estimatePi = TRUE, single_step_analysis = TRUE,
                      pedigree = TRUE, chain_length = 5000, output_samples_frequency = 100)  #pedigree=TRUE: pedigree; FALSE: false
 ```
 

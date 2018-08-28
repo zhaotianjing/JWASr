@@ -3,13 +3,11 @@
 #'
 #' @export
 
-runMCMC = function(model, mydata, estimatePi = FALSE, chain_length = 1000, methods="conventional (no markers)",
+runMCMC = function(data, estimatePi = FALSE, chain_length = 1000, methods="conventional (no markers)",
                    output_samples_frequency = 0, outputEBV = FALSE,single_step_analysis=FALSE, pedigree = FALSE){
-  #model
-  JuliaCall::julia_assign("model", model)
 
   #data
-  JuliaCall::julia_assign("mydata", mydata)
+  JuliaCall::julia_assign("data", data)
 
   #estimatePi
   temp_estimatePi = as.integer(estimatePi)
@@ -35,9 +33,9 @@ runMCMC = function(model, mydata, estimatePi = FALSE, chain_length = 1000, metho
 
   #pedigree
   if (pedigree == FALSE){
-    JuliaCall::julia_command("out = runMCMC(model, mydata, estimatePi = convert(Bool,temp_estimatePi), chain_length=chain_length,methods = methods, output_samples_frequency=output_samples_frequency, outputEBV = convert(Bool,temp_outputEBV),single_step_analysis = convert(Bool,temp_single_step_analysis),pedigree = false)")
+    JuliaCall::julia_command("out = runMCMC(model, data, estimatePi = convert(Bool,temp_estimatePi), chain_length=chain_length,methods = methods, output_samples_frequency=output_samples_frequency, outputEBV = convert(Bool,temp_outputEBV),single_step_analysis = convert(Bool,temp_single_step_analysis),pedigree = false)")
   } else {
-    JuliaCall::julia_command("out = runMCMC(model, mydata, estimatePi = convert(Bool,temp_estimatePi), chain_length=chain_length,methods = methods, output_samples_frequency=output_samples_frequency, outputEBV = convert(Bool,temp_outputEBV),single_step_analysis = convert(Bool,temp_single_step_analysis),pedigree = pedigree)")
+    JuliaCall::julia_command("out = runMCMC(model, data, estimatePi = convert(Bool,temp_estimatePi), chain_length=chain_length,methods = methods, output_samples_frequency=output_samples_frequency, outputEBV = convert(Bool,temp_outputEBV),single_step_analysis = convert(Bool,temp_single_step_analysis),pedigree = pedigree)")
   }
 
   out=JuliaCall::julia_eval("out")
