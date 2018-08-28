@@ -9,7 +9,11 @@ output: rmarkdown::github_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-
+### Install package
+```{r}
+library(devtools)
+install_github("zhaotianjing/JWASr")
+```
 
 ### set up (windows user)
 ```{r}
@@ -49,8 +53,7 @@ JWASr::ran_julia('set_random(model, "x2", G1)')
 ```
 ```{r}
 JWASr::assign("G2",diag(4))
-JWASr::assign("ID_dam","ID dam")
-JWASr::ran_julia('set_random(model,ID_dam,pedigree,"G2")')
+JWASr::ran_julia('set_random(model,"ID dam",pedigree,G2)')
 ```
 
 ### add genotypes

@@ -56,7 +56,7 @@ JWASr::ran_julia('set_random(model,"ID dam",pedigree,G2)')
 ### run
 ```{r}
 JWASr::ran_julia('outputMCMCsamples(model,"x2")')
-out = JWASr::runMCMC(model, phenotypes, chain_length = 5000, output_samples_frequency = 100, outputEBV = TRUE)   
+out = JWASr::runMCMC(data = phenotypes, chain_length = 5000, output_samples_frequency = 100, outputEBV = TRUE)   
 ```
 
 ### select result "EBV_y2"

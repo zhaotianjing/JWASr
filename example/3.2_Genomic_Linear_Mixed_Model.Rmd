@@ -67,7 +67,7 @@ JWASr::add_genotypes(geno_path, G3)  #separator=',' is default
 ### run
 ```{r}
 JWASr::ran_julia('outputMCMCsamples(model,"x2")')
-out = JWASr::runMCMC(model, phenotypes, methods = "BayesC", estimatePi = TRUE, chain_length = 5000, output_samples_frequency = 100)
+out = JWASr::runMCMC(data = phenotypes, methods = "BayesC", estimatePi = TRUE, chain_length = 5000, output_samples_frequency = 100)
 ```
 
 ### select result "Posterior mean of Pi"
