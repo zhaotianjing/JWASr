@@ -3,15 +3,16 @@
 #' @export
 
 
-add_genotypes = function(geno_path, G, separator=','){
-  JuliaCall::julia_assign("genofile", geno_path)
-  JuliaCall::julia_assign("G", G)
-  JuliaCall::julia_assign("separator", separator)
+add_genotypes = function(path, G3){
+  JuliaCall::julia_assign("genofile", path)
+  JuliaCall::julia_assign("G3", G3)
   
-  JuliaCall::julia_command("add_genotypes(model, genofile = genofile, G = G, separator = separator)")
+
+  
+  JuliaCall::julia_command("add_genotypes(model, genofile, G, separator = ',')")
 }
 
-
+  
 
 
 

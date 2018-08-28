@@ -68,7 +68,7 @@ JWASr::add_genotypes(geno_path,G3,separator=',')  ##add genotypes on "model"
 ### run
 ```{r}
 JWASr::ran_julia("outputMCMCsamples(model,x2)")
-out = JWASr::runMCMC(model1, phenotypes, methods = "BayesC", estimatePi = 1, chain_length = 5000, output_samples_frequency = 100)  #estimatePi = 1 : true; 0: false
+out = JWASr::runMCMC(model, phenotypes, methods = "BayesC", estimatePi = 1, chain_length = 5000, output_samples_frequency = 100)  #estimatePi = 1 : true; 0: false
 out
 ```
 
