@@ -4,7 +4,7 @@
 \alias{add_genotypes}
 \title{add genotypes from file path}
 \usage{
-add_genotypes(path, G3)
+add_genotypes(path, G_geno, separator = ",")
 }
 \description{
 add genotypes from file path

@@ -62,8 +62,16 @@ JWASr::ran_julia("set_random(model,ID_dam,pedigree,G2)")
 ```{r}
 G3 = 1.0
 geno_path = "D:/JWASr/data/genotypes.txt"
-JWASr::add_genotypes(geno_path,G3,separator=',')  ##add genotypes on "model"
+
 ```
+
+```{r}
+JWASr::add_genotypes(geno_path, G3, separator=',')  ##add genotypes on "model"
+# JuliaCall::julia_assign("genofile",geno_path)
+# JuliaCall::julia_assign("G3", 1.0)
+# JWASr::ran_julia("add_genotypes(model,genofile,G3,separator=',');")
+```
+
 
 ### run
 ```{r}
