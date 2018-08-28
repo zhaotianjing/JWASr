@@ -41,7 +41,7 @@ model = JWASr::build_model(model_equation,R) #build "model" in Julia
 
 ### set covariate
 ```{r}
-JWASr::ran_julia('set_covariate(model,"x1");')
+JWASr::ran_julia('set_covariate(model,"x1")')
 ```
 
 
@@ -70,8 +70,8 @@ JWASr::ran_julia('outputEBV(model,["a1","a2","a3"]);')
 ```
 ```{r}
 JWASr::ran_julia("outputMCMCsamples(model,x2)")
-out = JWASr::runMCMC(model, phenotypes, methods = "RR-BLUP",single_step_analysis=TRUE,
-                     pedigree=TRUE, chain_length = 5000, output_samples_frequency = 100,outputEBV=TRUE)  #pedigree=TRUE: pedigree FALSE: false
+out = JWASr::runMCMC(model, phenotypes, methods = "RR-BLUP",single_step_analysis = TRUE,
+                     pedigree=TRUE, chain_length = 5000, output_samples_frequency = 100,outputEBV = TRUE)  #pedigree=TRUE: pedigree; FALSE: false
 out
 ```
 
