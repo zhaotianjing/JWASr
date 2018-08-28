@@ -9,11 +9,7 @@ output: rmarkdown::github_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-### Install package
-```{r}
-library(devtools)
-install_github("zhaotianjing/JWASr")
-```
+
 ### set up (windows user)
 ```{r}
 path_libjulia = "C:/Users/ztjsw/AppData/Local/Julia-0.7.0/bin/libjulia.dll"
@@ -63,7 +59,7 @@ JWASr::ran_julia("set_random(model,ID_dam,pedigree,G2)")
 ### run
 ```{r}
 JWASr::ran_julia("outputMCMCsamples(model,x2)")
-out = JWASr::runMCMC(model,phenotypes,chain_length=5000,output_samples_frequency=100, outputEBV = 1)   #outputEBV  = 1: true; 0: false
+out = JWASr::runMCMC(model,phenotypes,chain_length=5000,output_samples_frequency=100, outputEBV = TRUE)   
 ```
 
 ### select result "EBV_y2"

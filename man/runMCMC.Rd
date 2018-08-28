@@ -6,20 +6,8 @@
 \usage{
 runMCMC(model, mydata, estimatePi = 0, chain_length = 1000,
   methods = "conventional (no markers)", output_samples_frequency = 0,
-  single_step_analysis = 0, pedigree = 0, outputEBV = 1)
-}
-\arguments{
-\item{model}{the model built before}
-
-\item{mydata}{the data upload before}
+  outputEBV = FALSE, single_step_analysis = FALSE, pedigree = FALSE)
 }
 \description{
 Run the MCMC model
-}
-\examples{
-model_equation = "y1 = intercept + x1"
-R = 1.0
-model = build_model(model_equation, R)
-runMCMC(model, phenotypes)
-
 }

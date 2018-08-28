@@ -37,6 +37,7 @@ JWASr::get_pedigree(ped_path, separator=',', header=T)  #build "pedigree" in Jul
 model_equation = "y1 = intercept + x1*x3 + x2 + x3 + ID + dam";
 R = 1.0
 model = JWASr::build_model(model_equation,R) #build "model" in Julia
+model
 ```
 
 ### set covariate
@@ -69,11 +70,15 @@ JWASr::add_genotypes(geno_path, G3)  #separator=',' is default
 
 ### run
 ```{r}
-JWASr::ran_julia("outputEBV(model1,["a1","a2","a3"]);")
-
+JWASr::assign("a1","a1")
+JWASr::assign("a2","a2")
+JWASr::assign("a3","a3")
+JWASr::ran_julia("outputEBV(model,[a1,a2,a3]);")
+```
+```{r}
 JWASr::ran_julia("outputMCMCsamples(model,x2)")
-out = JWASr::runMCMC(model, phenotypes, methods = "RR-BLUP",single_step_analysis=true,
-                     pedigree=pedigree, chain_length = 5000, output_samples_frequency = 100,outputEBV=true)  #estimatePi = 1 : true; 0: false 
+out = JWASr::runMCMC(model, phenotypes, methods = "RR-BLUP",single_step_analysis=TRUE,
+                     pedigree=pedigree, chain_length = 5000, output_samples_frequency = 100,outputEBV=true)  #single_step_analysis = 1 : true; 0: false 
 out
 ```
 
