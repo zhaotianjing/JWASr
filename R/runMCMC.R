@@ -46,22 +46,6 @@ runMCMC = function(model, mydata, estimatePi = FALSE, chain_length = 1000, metho
 
 
 
-# runMCMC = function(mydata, methods="RR-BLUP", pedigree = FALSE){
-#
-#   JuliaCall::julia_assign("mydata", mydata)
-#
-#   JuliaCall::julia_assign("methods",methods)
-#
-#   if (pedigree == FALSE){
-#     JuliaCall::julia_command("out = runMCMC(model, mydata, estimatePi = false, chain_length=5000,methods = methods, output_samples_frequency=100, outputEBV = true,single_step_analysis = true,pedigree = false)")
-#   } else {
-#     JuliaCall::julia_command("out = runMCMC(model, mydata, estimatePi = false, chain_length=5000,methods = methods, output_samples_frequency=100, outputEBV = true,single_step_analysis = true,pedigree = pedigree)")
-#   }
-#
-#   out=JuliaCall::julia_eval("out")
-#   return(out)
-# }
-
 
 
 
