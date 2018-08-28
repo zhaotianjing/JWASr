@@ -9,8 +9,6 @@ output: rmarkdown::github_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-
-
 ### Install package
 ```{r}
 library(devtools)
@@ -43,22 +41,19 @@ phenotypes
 
 ### set covariate
 ```{r}
-JWASr::assign("x1","x1")
-JWASr::ran_julia("set_covariate(model,x1)")
+JWASr::ran_julia('set_covariate(model,"x1")')
 ```
 
 ### set random
 ```{r}
-G1 = diag(2)
-JWASr::assign("x2","x2")
-JWASr::assign("G1",G1)
-JWASr::ran_julia("set_random(model,x2,G1);")
+JWASr::assign("G1",diag(2))
+JWASr::ran_julia('set_random(model,"x2",G1)')
 ```
 
 
 ### run
 ```{R}
-JWASr::ran_julia("outputMCMCsamples(model,x1)")
-out = JWASr::runMCMC(model, phenotypes,chain_length=5000,output_samples_frequency=100)
+JWASr::ran_julia('outputMCMCsamples(model,"x1")')
+out = JWASr::runMCMC(model, phenotypes, chain_length=5000, output_samples_frequency=100)
 out
 ```
