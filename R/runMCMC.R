@@ -12,7 +12,7 @@
 #' @export
 
 runMCMC = function(model, mydata, estimatePi = 0, chain_length = 1000, methods="conventional (no markers)",
-                   output_samples_frequency = 0, single_step_analysis= 0, pedigree = 0, outputEBV = 0){
+                   output_samples_frequency = 0, single_step_analysis= 0, pedigree = 0, outputEBV = 1){
   JuliaCall::julia_assign("model", model)
   JuliaCall::julia_assign("mydata", mydata)
   JuliaCall::julia_assign("estimatePi", estimatePi)
@@ -26,6 +26,7 @@ runMCMC = function(model, mydata, estimatePi = 0, chain_length = 1000, methods="
   JuliaCall::julia_assign("pedigree", pedigree)
 
   JuliaCall::julia_assign("outputEBV", outputEBV)
+  # JuliaCall::julia_command("outputEBV = Int(outputEBV)")
   JuliaCall::julia_command("outputEBV = convert(Bool,outputEBV)")
 
 
