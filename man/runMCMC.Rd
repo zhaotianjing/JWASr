@@ -6,7 +6,7 @@
 \usage{
 runMCMC(model, mydata, estimatePi = 0, chain_length = 1000,
   methods = "conventional (no markers)", output_samples_frequency = 0,
-  outputEBV = 0)
+  single_step_analysis = 0, pedigree = 0, outputEBV = 0)
 }
 \arguments{
 \item{model}{the model built before}
