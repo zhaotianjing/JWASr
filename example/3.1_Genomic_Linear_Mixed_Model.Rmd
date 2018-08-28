@@ -2,7 +2,7 @@
 title: "3.1_Genomic_Linear_Mixed_Model"
 author: "Tianjing Zhao"
 date: "August 27, 2018"
-output: html_document
+output: rmarkdown::github_document
 ---
 
 ```{r setup, include=FALSE}
@@ -69,8 +69,8 @@ JWASr::add_genotypes(geno_path, G3)  #separator=',' is default
 
 ### run
 ```{r}
-JWASr::ran_julia("outputMCMCsamples(model,x2)")
-out = JWASr::runMCMC(model, phenotypes, methods = "BayesC", estimatePi = 1, chain_length = 5000, output_samples_frequency = 100)  #estimatePi = 1 : true; 0: false
+out = JWASr::runMCMC(model, phenotypes, methods = "BayesC", estimatePi = 1, 
+                     chain_length = 5000, output_samples_frequency = 100)  #estimatePi = 1 : true; 0: false 
 out
 ```
 
