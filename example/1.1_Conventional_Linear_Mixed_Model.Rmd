@@ -16,10 +16,15 @@ library(devtools)
 install_github("zhaotianjing/JWASr")
 ```
 
+### load package
+```{r}
+library("JWASr")
+```
+
 ### set up (windows user)
 ```{r}
 path_libjulia = "C:/Users/ztjsw/AppData/Local/Julia-0.7.0/bin/libjulia.dll"
-JWASr::jwasr_setup_win(path_libjulia)
+jwasr_setup_win(path_libjulia)
 ```
 For Mac user, run one line "JWASr::jwasr_setup()" to setup.
 
@@ -29,7 +34,7 @@ For Mac user, run one line "JWASr::jwasr_setup()" to setup.
 model_equation = "y1 = intercept + x1*x3 + x2 + x3"
 R = 1.0
 
-model = JWASr::build_model(model_equation, R)  #build "model" in Julia
+build_model(model_equation, R)  #build "model" in Julia
 ```
 
 
@@ -41,14 +46,14 @@ phenotypes
 
 ### set covariate
 ```{r}
-JWASr::ran_julia('set_covariate(model,"x1")')
+set_covariate("x1")
 ```
 
 
 ### set random
 ```{r}
-JWASr::assign("G1",1.0)
-JWASr::ran_julia('set_random(model,"x2",G1)')
+assign("G1",1.0)
+ran_julia('set_random(model,"x2",G1)')
 ```
 
 ### run

@@ -14,7 +14,10 @@ knitr::opts_chunk$set(echo = TRUE)
 library(devtools)
 install_github("zhaotianjing/JWASr")
 ```
-
+### load package
+```{r}
+library("JWASr")
+```
 ### set up (windows user)
 ```{r}
 path_libjulia = "C:/Users/ztjsw/AppData/Local/Julia-0.7.0/bin/libjulia.dll"

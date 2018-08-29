@@ -8,8 +8,15 @@ output: rmarkdown::github_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-
-
+### Install package
+```{r}
+library(devtools)
+install_github("zhaotianjing/JWASr")
+```
+### load package
+```{r}
+library("JWASr")
+```
 ### set up (windows user)
 ```{r}
 path_libjulia = "C:/Users/ztjsw/AppData/Local/Julia-0.7.0/bin/libjulia.dll"
