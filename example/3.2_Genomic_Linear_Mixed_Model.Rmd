@@ -21,17 +21,17 @@ library("JWASr")
 ### set up (windows user)
 ```{r}
 path_libjulia = "C:/Users/ztjsw/AppData/Local/Julia-0.7.0/bin/libjulia.dll"
-JWASr::jwasr_setup_win(path_libjulia)
+jwasr_setup_win(path_libjulia)
 ```
 For Mac user, run one line "JWASr::jwasr_setup()" to setup.
 
 
 ### data
 ```{r}
-phenotypes = JWASr::phenotypes
+phenotypes = phenotypes  #build-in data
 
 ped_path = "D:\\JWASr\\data\\pedigree.txt"
-JWASr::get_pedigree(ped_path, separator=',', header=T)  #build "pedigree" in Julia
+get_pedigree(ped_path, separator=',', header=T)  #build "pedigree" in Julia
 ```
 
 ### build model
@@ -40,22 +40,22 @@ model_equation ="y1 = intercept + x1 + x3 + ID + dam
                   y2 = intercept + x1 + x2 + x3 + ID
                   y3 = intercept + x1 + x1*x3 + x2 + ID"
 R = diag(3)
-model = JWASr::build_model(model_equation,R)
+model = build_model(model_equation, R)
 ```
 
 ### set covariate
 ```{r}
-JWASr::ran_julia('set_covariate(model,"x1");')
+set_covariate("x1")
 ```
 
 ### set random
 ```{r}
-JWASr::assign("G1", diag(2))
-JWASr::ran_julia('set_random(model,"x2",G1)')
+G1 = diag(2)
+set_random("x2",G1)
 ```
 ```{r}
-JWASr::assign("G2",diag(4))
-JWASr::ran_julia('set_random(model,"ID dam",pedigree,G2)')
+G2 = diag(4)
+set_random("ID dam", G2, pedigree = TRUE)
 ```
 
 ### add genotypes
@@ -63,14 +63,14 @@ JWASr::ran_julia('set_random(model,"ID dam",pedigree,G2)')
 G3 = diag(3)
 geno_path = "D:/JWASr/data/genotypes.txt"
 
-JWASr::add_genotypes(geno_path, G3)  #separator=',' is default
+add_genotypes(geno_path, G3)  #separator=',' is default
 ```
 
 
 ### run
 ```{r}
-JWASr::ran_julia('outputMCMCsamples(model,"x2")')
-out = JWASr::runMCMC(data = phenotypes, methods = "BayesC", estimatePi = TRUE, chain_length = 5000, output_samples_frequency = 100)
+outputMCMCsamples("x2")
+out = runMCMC(data = phenotypes, methods = "BayesC", estimatePi = TRUE, chain_length = 5000, output_samples_frequency = 100)
 ```
 
 ### select result "Posterior mean of Pi"

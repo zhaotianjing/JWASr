@@ -40,7 +40,7 @@ build_model(model_equation, R)  #build "model" in Julia
 
 ### data
 ```{r}
-phenotypes = JWASr::phenotypes
+phenotypes = phenotypes  #build-in data
 phenotypes
 ```
 
@@ -52,14 +52,14 @@ set_covariate("x1")
 
 ### set random
 ```{r}
-assign("G1",1.0)
-ran_julia('set_random(model,"x2",G1)')
+G1 = 1.0
+set_random("x2",G1)
 ```
 
 ### run
 ```{R}
-JWASr::ran_julia('outputMCMCsamples(model,"x3")')
-out = JWASr::runMCMC(data = phenotypes, chain_length=5000, output_samples_frequency=100)
+outputMCMCsamples("x3")
+out = runMCMC(data = phenotypes, chain_length=5000, output_samples_frequency=100)
 out
 ```
 
