@@ -69,7 +69,7 @@ add_genotypes(geno_path, G3)  #separator=',' is default
 
 ### run
 ```{r}
-outputEBV('["a1","a2","a3"]')
+outputEBV(ai = c("a1","a2","a3"))
 ```
 ```{r}
 outputMCMCsamples("x2")
