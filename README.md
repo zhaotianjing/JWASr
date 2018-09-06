@@ -11,14 +11,7 @@
     install.package("devtools")
     ```
 
-    If the error massage is shown as follows,
-    ```bash
-    Installation failed: Command failed (50)
-    ```
-    please install the latest version of devtools as
-    ```bash
-    devtools::install_github("hadley/devtools")
-    ```
+    If the error massage `Installation failed: Command failed (50)` is shown, please install the latest version of devtools as `devtools::install_github("hadley/devtools")`.
 
 4. Install R package from Github
 
