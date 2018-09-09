@@ -8,6 +8,21 @@ runMCMC(data, estimatePi = FALSE, chain_length = 1000,
   methods = "conventional (no markers)", output_samples_frequency = 0,
   outputEBV = FALSE, single_step_analysis = FALSE, pedigree = FALSE)
 }
+\arguments{
+\item{estimatePi}{FALSE}
+
+\item{chain_length}{1000}
+
+\item{methods}{"conventional (no markers)"}
+
+\item{output_samples_frequency}{0}
+
+\item{outputEBV}{FALSE}
+
+\item{single_step_analysis}{FALSE}
+
+\item{pedigree}{FALSE}
+}
 \description{
 Run the MCMC model
 }

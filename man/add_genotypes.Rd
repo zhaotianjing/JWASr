@@ -2,10 +2,22 @@
 % Please edit documentation in R/add_genotypes.R
 \name{add_genotypes}
 \alias{add_genotypes}
-\title{add genotypes from file path}
+\title{Use Genomic Information}
 \usage{
 add_genotypes(path, G_geno)
 }
+\arguments{
+\item{path}{String}
+
+\item{G_geno}{A number or diag matrix}
+}
 \description{
-add genotypes from file path
+Use Genomic Information
+}
+\examples{
+G3 = diag(3)
+geno_path = "D:/JWASr/data/genotypes.txt"
+add_genotypes(geno_path, G3)
+
+
 }

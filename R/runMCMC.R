@@ -1,5 +1,14 @@
 #' Run the MCMC model
 #'
+#' @param estimatePi FALSE
+#' @param chain_length 1000
+#' @param methods "conventional (no markers)"
+#' @param output_samples_frequency 0
+#' @param outputEBV FALSE
+#' @param single_step_analysis FALSE
+#' @param pedigree FALSE
+#'
+#'
 #'
 #' @export
 

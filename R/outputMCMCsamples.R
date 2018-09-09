@@ -1,3 +1,8 @@
+#' outputMCMCsamples
+#'
+#' @param xi String
+#'
+#'
 #' @export
 
 outputMCMCsamples = function(xi){

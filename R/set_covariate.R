@@ -1,5 +1,7 @@
-#'  set covariate
-#' @param xi string eg."x1"
+#' Set Factors or Covariate
+#'
+#' @param xi String
+#'
 #'
 #' @export
 

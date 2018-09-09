@@ -7,9 +7,9 @@
 assign(object, value)
 }
 \arguments{
-\item{object}{object for assign}
+\item{object}{String}
 
-\item{value}{value for assign}
+\item{value}{String or number}
 }
 \description{
 assign

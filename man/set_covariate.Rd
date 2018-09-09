@@ -2,13 +2,13 @@
 % Please edit documentation in R/set_covariate.R
 \name{set_covariate}
 \alias{set_covariate}
-\title{set covariate}
+\title{Set Factors or Covariate}
 \usage{
 set_covariate(xi)
 }
 \arguments{
-\item{xi}{string eg."x1"}
+\item{xi}{String}
 }
 \description{
-set covariate
+Set Factors or Covariate
 }

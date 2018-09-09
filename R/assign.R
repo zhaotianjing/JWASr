@@ -1,6 +1,6 @@
 #' assign
-#' @param object object for assign
-#' @param value value for assign
+#' @param object String
+#' @param value String or number
 #'
 #'
 #' @examples
@@ -10,8 +10,6 @@
 
 assign = function(object, value){
 
-
   JuliaCall::julia_assign(object, value)
-
 
 }

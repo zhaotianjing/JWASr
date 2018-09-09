@@ -1,3 +1,7 @@
+#' Set outputEBV
+#'
+#'
+#'
 #' @export
 
 outputEBV = function(ai){

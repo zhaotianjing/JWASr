@@ -1,4 +1,13 @@
-#' add genotypes from file path
+#' Use Genomic Information
+#'
+#' @param path String
+#' @param G_geno A number or diag matrix
+#'
+#' @examples
+#' G3 = diag(3)
+#' geno_path = "D:/JWASr/data/genotypes.txt"
+#' add_genotypes(geno_path, G3)
+#'
 #'
 #' @export
 

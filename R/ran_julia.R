@@ -1,4 +1,4 @@
-#'  ran_julia
+#' ran_julia
 #'
 #'
 #' @export

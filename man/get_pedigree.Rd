@@ -2,10 +2,19 @@
 % Please edit documentation in R/get_pedigree.R
 \name{get_pedigree}
 \alias{get_pedigree}
-\title{get pedigree from file path}
+\title{Get pedigree}
 \usage{
 get_pedigree(path, separator = ",", header = TRUE)
 }
+\arguments{
+\item{path}{String}
+
+\item{header}{TRUE or FALSE}
+}
 \description{
-get pedigree from file path
+Get pedigree
+}
+\examples{
+ped_path = "D:\\\\JWASr\\\\data\\\\pedigree.txt"
+get_pedigree(ped_path, separator=',', header=T)  #build "pedigree" in Julia
 }
