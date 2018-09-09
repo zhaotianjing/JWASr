@@ -7,8 +7,8 @@
 3. Install prerequisite R package `JuliaCall` and `devtools`.
 
     ```bash
-    install.package("JuliaCall")
-    install.package("devtools")
+    install.packages("JuliaCall")
+    install.packages("devtools")
     ```
 
     If the error massage `Installation failed: Command failed (50)` is shown, please install the latest version of devtools as `devtools::install_github("hadley/devtools")`.
@@ -32,4 +32,5 @@ Please set up **every time** you start a new session of R. The set up time is ab
     path_libjulia = "C:/Users/ztjsw/AppData/Local/Julia-0.7.0/bin/libjulia.dll"
     JWASr::jwasr_setup_win(path_libjulia)
     ```
+    If R session aborted, please click "Start New Session" and set up again.
 
