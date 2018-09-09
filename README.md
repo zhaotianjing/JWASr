@@ -3,7 +3,7 @@
 ### Installation
 
 1. Install [Julia](https://julialang.org/downloads/).
-2. Install [R](https://www.r-project.org) and RStudio (IDE).
+2. Install [R](https://www.r-project.org) and [RStudio](https://www.rstudio.com/products/rstudio/download/) (IDE).
 3. Install prerequisite R package `JuliaCall` and `devtools`.
 
     ```bash
