@@ -8,7 +8,6 @@ jwasr_setup()
 }
 \description{
 This function initializes Julia and the JWAS.jl package
-The first time will be long since it includes precompilation.
 }
 \details{
 jwasr_setup()
