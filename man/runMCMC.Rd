@@ -4,18 +4,35 @@
 \alias{runMCMC}
 \title{Run the MCMC model}
 \usage{
-runMCMC(data, estimatePi = FALSE, chain_length = 1000,
-  methods = "conventional (no markers)", output_samples_frequency = 0,
+runMCMC(data, Pi = 0, estimatePi = FALSE, chain_length = 100,
+  burnin = 0, starting_value = FALSE,
+  printout_frequency = chain_length + 1, missing_phenotypes = FALSE,
+  constraint = FALSE, methods = "conventional (no markers)",
+  output_samples_frequency = 0, update_priors_frequency = 0,
   outputEBV = FALSE, single_step_analysis = FALSE, pedigree = FALSE)
 }
 \arguments{
+\item{Pi}{0.0}
+
 \item{estimatePi}{FALSE}
 
-\item{chain_length}{1000}
+\item{chain_length}{100}
 
-\item{methods}{"conventional (no markers)"}
+\item{burnin}{0}
+
+\item{starting_value}{FALSE}
+
+\item{printout_frequency}{chain_length+1}
+
+\item{missing_phenotypes}{FALSE}
+
+\item{constraint}{FALSE}
+
+\item{methods}{"conventional no markers"}
 
 \item{output_samples_frequency}{0}
+
+\item{update_priors_frequency}{0}
 
 \item{outputEBV}{FALSE}
 
