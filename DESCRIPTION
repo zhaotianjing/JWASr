@@ -1,7 +1,7 @@
 Package: JWASr
 Title: JWASr
 Version: 0.0.0.9000
-Authors@R: person("First", "Last", email = "tjzhao@ucdavis.edu", role = c("aut", "cre"))
+Authors@R: person("Tianjing", "Zhao", email = "tjzhao@ucdavis.edu", role = c("aut", "cre"))
 Description: R wrapper for JWAS.jl.
 Depends: R (>= 3.5.1)
 License: GNU
