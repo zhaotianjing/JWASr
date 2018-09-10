@@ -94,3 +94,6 @@ add_genotypes(geno_path, G3)  #separator=',' is default
 ``` r
 outputMCMCsamples("x2")
 ```
+
+### For developers
+After updating the code locally, please run `devtools::document()` in the package folder.
