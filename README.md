@@ -5,7 +5,7 @@
 
 1. Install [Julia](https://julialang.org/downloads/).
 2. Install [R](https://www.r-project.org) and [RStudio](https://www.rstudio.com/products/rstudio/download/) (IDE).
-3. Install prerequisite R package `JuliaCall` and `devtools`.
+3. Install prerequisite R package `JuliaCall` and `devtools` in R.
 
     ```bash
     install.packages("JuliaCall")
@@ -14,11 +14,10 @@
 
     If the error massage `Installation failed: Command failed (50)` is shown, please install the latest version of devtools as `devtools::install_github("hadley/devtools")`.
 
-4. Install R package `JWASr` from Github
+4. Install R package `JWASr` in R
 
     ```bash
-    library(devtools)
-    install_github("zhaotianjing/JWASr")
+    devtools::install_github("zhaotianjing/JWASr")
     ```
 ### Set up
 Please set up **every time** you start a new session of R. The set up time is about 10 second.
