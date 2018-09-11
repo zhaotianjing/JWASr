@@ -56,7 +56,8 @@ model_equation ="y1 = intercept + x1 + x3 + ID + dam
                   y2 = intercept + x1 + x2 + x3 + ID
                   y3 = intercept + x1 + x1*x3 + x2 + ID"
 R = diag(3)
-model = build_model(model_equation, R)
+
+build_model(model_equation, R) #build "model" in Julia
 ```
 
 #### Step 4: Set Factors or Covariate
