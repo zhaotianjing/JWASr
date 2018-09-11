@@ -1,4 +1,5 @@
 
+
 # JWASr
 
 ### Installation
@@ -35,6 +36,7 @@ Please set up **every time** you start a new session of R. The set up time is ab
     If R session aborted, please click "Start New Session" and set up again.
 
 ### Workflow
+Note, all data can be found in our subfolder named "data".
 #### Step 1: Load Package
 ``` r
 library("JWASr")
@@ -49,6 +51,7 @@ phenotypes = phenotypes #build-in data
 ped_path = "D:\\JWASr\\data\\pedigree.txt" #please change to your local path
 get_pedigree(ped_path, separator = ',', header = T)  #build "pedigree" in Julia
 ```
+We create an object named "pedigree" in Julia, which contains pedigree information. 
 
 #### Step 3: Build Model Equations
 ``` r
@@ -59,6 +62,7 @@ R = diag(3)
 
 build_model(model_equation, R) #build "model" in Julia
 ```
+We created an object named "model" in Julia, which is the model we built. The following code are based on the "model".
 
 #### Step 4: Set Factors or Covariate
 
@@ -85,7 +89,7 @@ set_random("ID dam", G2, pedigree = TRUE)
 
 ``` r
 G3 = diag(3)
-geno_path = "D:/JWASr/data/genotypes.txt"  #change to your local path
+geno_path = "D:/JWASr/data/genotypes.txt"  #please change to your local path
 
 add_genotypes(geno_path, G3)  #separator=',' is default
 ```
@@ -97,4 +101,4 @@ outputMCMCsamples("x2")
 ```
 
 ### For developers
-After updating the code locally, please run `devtools::document()` in the package folder.
+If you change any function in subfolder "R", please run `devtools::document()` in R to update the package. (under path of JWASr).
