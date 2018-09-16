@@ -1,4 +1,4 @@
-3.Genomic Linear Mixed Model
+3.\_Genomic\_Linear\_Mixed\_Model
 ================
 Tianjing Zhao
 August 27, 2018

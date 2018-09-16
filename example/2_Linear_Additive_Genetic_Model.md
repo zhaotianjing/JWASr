@@ -1,4 +1,4 @@
-2. Linear Additive Genetic Model
+2.\_Linear\_Additive\_Genetic\_Model
 ================
 Tianjing Zhao
 August 27, 2018
