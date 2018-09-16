@@ -15,4 +15,5 @@ jwasr_setup_win <- function (path_libjulia){
   julia = JuliaCall::julia_setup()
   JuliaCall::julia_library("JWAS")
   JuliaCall::julia_library("CSV")
+  # JuliaCall::julia_library("DelimitedFiles")
 }

@@ -14,9 +14,3 @@ build_model(model_equation, R)
 \description{
 Build model
 }
-\examples{
-model_equation = "y1 = intercept + x1"
-R = 1.0
-model = build_model(model_equation, R)
-
-}

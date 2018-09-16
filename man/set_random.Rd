@@ -4,9 +4,11 @@
 \alias{set_random}
 \title{Set Random or Fixed Effects}
 \usage{
-set_random(xi, G, pedigree = FALSE)
+set_random(model, xi, G)
 }
 \arguments{
+\item{model}{model}
+
 \item{xi}{String}
 
 \item{G}{number or diag matrix}

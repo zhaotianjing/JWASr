@@ -1,13 +1,12 @@
 #' Set Factors or Covariate
 #'
-#' @param xi String
 #'
 #'
 #' @export
 
 
-set_covariate = function(xi){
-  JuliaCall::julia_call("set_covariate", JuliaCall::julia_eval("model"),xi)
+set_covariate = function(model, xi){
+  JuliaCall::julia_call("set_covariate", model, xi)
 }
 
 

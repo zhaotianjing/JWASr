@@ -9,17 +9,11 @@
 
 #' @export
 
-get_pedigree = function(path, separator = ',', header = TRUE){
+get_pedigree = function(path, separator = ",", header = TRUE){
 
-  JuliaCall::julia_assign("pedfile", path)
-  JuliaCall::julia_assign("separator", separator)
+  header = as.integer(header)
 
-  if (header == TRUE){
-    JuliaCall::julia_command("pedigree = get_pedigree(pedfile, separator = separator,header = true)")
-
-  } else {
-    JuliaCall::julia_command("pedigree = get_pedigree(pedfile, separator = separator,header = false)")
-  }
+  JuliaCall::julia_call("get_pedigree", path, separator = separator, header = header)
 
 }
 

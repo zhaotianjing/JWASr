@@ -1,4 +1,4 @@
-2.2\_Linear\_Additive\_Genetic\_Model
+2. Linear Additive Genetic Model
 ================
 Tianjing Zhao
 August 27, 2018
@@ -11,23 +11,109 @@ library("JWASr")
 Please make sure you've already set up.
 
 ### Step 2: Read data
+
 ``` r
 phenotypes = phenotypes #build-in data
 ```
 You can import your own data by [read.table()](https://www.rdocumentation.org/packages/utils/versions/3.5.1/topics/read.table).
 ``` r
-ped_path = "D:\\JWASr\\data\\pedigree.txt"  #change to your local path
-get_pedigree(ped_path, separator=',', header=T)  #build "pedigree" in Julia
+ped_path = "D:\\JWASr\\data\\pedigree.txt"  #please change to your local path
+get_pedigree(ped_path, separator=',', header=TRUE) 
+```
+Univariate Linear Additive Genetic Model
+---
+### Step 3: Build Model Equations
+
+``` r
+model_equation1 = "y1 = intercept + x1*x3 + x2 + x3 + ID + dam";
+R = 1.0
+
+model1 = build_model(model_equation1, R) 
 ```
 
+### Step 4: Set Factors or Covariate
+
+``` r
+set_covariate(model1, "x1")
+```
+
+
+### Step 5: Set Random or Fixed Effects
+
+``` r
+G1 = 1.0
+set_random(model1, "x2", G1) 
+```
+
+``` r
+G2 = diag(2)
+set_random_ped(model1, "ID dam", pedigree, G2)
+```
+
+
+### Step 6: Run Bayesian Analysis
+
+``` r
+outputMCMCsamples(model1, "x2")
+```
+
+``` r
+out = runMCMC(model1, phenotypes, chain_length = 5000, output_samples_frequency = 100)
+out
+```
+
+    ## $`Posterior mean of polygenic effects covariance matrix`
+    ##           [,1]      [,2]
+    ## [1,] 3.3931469 0.3802194
+    ## [2,] 0.3802194 1.6247857
+    ## 
+    ## $`Posterior mean of residual variance`
+    ## [1] 1.778849
+    ## 
+    ## $`Posterior mean of location parameters`
+    ##    Trait    Effect     Level     Estimate
+    ## 1      1 intercept intercept    -30.19578
+    ## 2      1     x1*x3    x1 * m   -0.9102935
+    ## 3      1     x1*x3    x1 * f    0.6452522
+    ## 4      1        x2         2  -0.01478697
+    ## 5      1        x2         1 -0.001557767
+    ## 6      1        x3         m     30.17486
+    ## 7      1        x3         f     29.10591
+    ## 8      1        ID        a2    0.1050424
+    ## 9      1        ID        a1    0.3625167
+    ## 10     1        ID        a3   -0.9619355
+    ## 11     1        ID        a7    0.1805772
+    ## 12     1        ID        a4    -1.284158
+    ## 13     1        ID        a6   -0.9379141
+    ## 14     1        ID        a9    -1.322888
+    ## 15     1        ID        a5     1.525415
+    ## 16     1        ID       a10     1.284201
+    ## 17     1        ID       a12  -0.05131535
+    ## 18     1        ID       a11  -0.05213253
+    ## 19     1        ID        a8    -2.323727
+    ## 20     1       dam        a2   0.07629914
+    ## 21     1       dam        a1    -0.205709
+    ## 22     1       dam        a3   -0.2856228
+    ## 23     1       dam        a7   0.07904597
+    ## 24     1       dam        a4   -0.2002867
+    ## 25     1       dam        a6   -0.8363825
+    ## 26     1       dam        a9    -0.466576
+    ## 27     1       dam        a5   0.02053787
+    ## 28     1       dam       a10   0.00751982
+    ## 29     1       dam       a12    -0.206505
+    ## 30     1       dam       a11   -0.2423756
+    ## 31     1       dam        a8   -0.6223393
+
+Multivariate Linear Additive Genetic Model
+---
 ### Step 3: Build Model Equations
 ``` r
-model_equation ="y1 = intercept + x1 + x3 + ID + dam
+model_equation2 ="y1 = intercept + x1 + x3 + ID + dam
                   y2 = intercept + x1 + x2 + x3 + ID
                   y3 = intercept + x1 + x1*x3 + x2 + ID"
 R = diag(3)
 
-build_model(model_equation, R)  #build "model" in Julia
+model2 = build_model(model_equation2, R)
 ```
 
 
@@ -36,7 +122,7 @@ build_model(model_equation, R)  #build "model" in Julia
 
 
 ``` r
-set_covariate("x1")
+set_covariate(model2, "x1")
 ```
 
 
@@ -44,20 +130,20 @@ set_covariate("x1")
 
 ``` r
 G1 = diag(2)
-set_random("x2",G1)
+set_random(model2,"x2",G1)
 ```
 
 
 ``` r
 G2 = diag(4)
-set_random("ID dam", G2, pedigree = TRUE)
+set_random_ped(model2, "ID dam", pedigree, G2)
 ```
 
 
 ### Step 6: Run Bayesian Analysis
 
 ``` r
-outputMCMCsamples("x2")
+outputMCMCsamples(model2, "x2")
 ```
 
 
@@ -217,3 +303,9 @@ out
     ## 62     3        ID       a12    -0.158376
     ## 63     3        ID       a11   -0.1414264
     ## 64     3        ID        a8   -0.2574019
+
+
+
+
+
+

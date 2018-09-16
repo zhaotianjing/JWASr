@@ -1,8 +1,7 @@
-1.2\_Conventional\_Linear\_Mixed\_Model
+1. Bayesian Linear Mixed Models (conventional)
 ================
 Tianjing Zhao
 August 26, 2018
-
 
 ### Step 1: Load Package
 
@@ -11,10 +10,11 @@ library("JWASr")
 ```
 Please make sure you've already set up.
 
+
 ### Step 2: Read data
 
 ``` r
-phenotypes = phenotypes #build-in data
+phenotypes = phenotypes  #build-in data
 phenotypes
 ```
 
@@ -31,24 +31,69 @@ phenotypes
     ## 10 a10  1.92 1.78 -0.88 0.2  1  m  a7
 You can import your own data by [read.table()](https://www.rdocumentation.org/packages/utils/versions/3.5.1/topics/read.table).
 
-
+Univariate Linear Mixed Model (conventional)
+----
 
 ### Step 3: Build Model Equations
+
 ``` r
-model_equation ="y1 = intercept + x1 + x3
+model_equation1 = "y1 = intercept + x1*x3 + x2 + x3"
+R = 1.0
+
+model1 = build_model(model_equation1, R)
+```
+
+### Step 4: Set Factors or Covariate
+
+``` r
+set_covariate(model1, "x1")
+```
+
+### Step 5: Set Random or Fixed Effects
+
+``` r
+G1 = 1.0
+set_random(model1, "x2",G1)
+```
+
+### Step 6: Run Bayesian Analysis
+
+``` r
+outputMCMCsamples(model1, "x3")
+out = runMCMC(model1, phenotypes, chain_length=5000, output_samples_frequency=100)
+out
+```
+
+    ## $`Posterior mean of residual variance`
+    ## [1] 5.480242
+    ##
+    ## $`Posterior mean of location parameters`
+    ##   Trait    Effect     Level    Estimate
+    ## 1     1 intercept intercept   -60.94357
+    ## 2     1     x1*x3    x1 * m -0.02613005
+    ## 3     1     x1*x3    x1 * f   0.4772402
+    ## 4     1        x2         2  -0.1875421
+    ## 5     1        x2         1   0.1704768
+    ## 6     1        x3         m    60.04687
+    ## 7     1        x3         f    59.67192
+  
+Multivariate Linear Mixed Model (conventional)
+---
+### Step 3: Build Model Equations
+``` r
+model_equation2 ="y1 = intercept + x1 + x3
                   y2 = intercept + x1 + x2 + x3
                   y3 = intercept + x1 + x1*x3 + x2"
 R = diag(3)
 
-build_model(model_equation,R)   #build "model" in Julia
+model2 = build_model(model_equation2,R)
 ```
-
 
 
 ### Step 4: Set Factors or Covariate
 
 ``` r
-set_covariate("x1")
+set_covariate(model2, "x1")
 ```
 
 
@@ -56,20 +101,20 @@ set_covariate("x1")
 
 ``` r
 G1 = diag(2)
-set_random("x2", G1)
+set_random(model2, "x2", G1)
 ```
 
 
 ### Step 6: Run Bayesian Analysis
 
 ``` r
-outputMCMCsamples("x1")
+outputMCMCsamples(model2, "x1")
 ```
 
 
 ``` r
-out = runMCMC(data = phenotypes, chain_length=5000, output_samples_frequency=100)
-out
+out2 = runMCMC(model2, phenotypes, chain_length=5000, output_samples_frequency=100)
+out2
 ```
 
     ## $`Posterior mean of residual variance`
@@ -96,3 +141,8 @@ out
     ## 14     3     x1*x3    x1 * f   8.014301
     ## 15     3        x2         2 -0.1757257
     ## 16     3        x2         1  0.1214085
+
+
+
+
+

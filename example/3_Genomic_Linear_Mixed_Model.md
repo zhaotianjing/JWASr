@@ -1,7 +1,9 @@
-3.2\_Genomic\_Linear\_Mixed\_Model
+3.Genomic Linear Mixed Model
 ================
 Tianjing Zhao
 August 27, 2018
+
+
 
 ### Step 1: Load Package
 
@@ -15,26 +17,140 @@ Please make sure you've already set up.
 ``` r
 phenotypes = phenotypes #build-in data
 
-ped_path = "D:\\JWASr\\data\\pedigree.txt" #change to your local path
-get_pedigree(ped_path, separator = ',', header = T)  #build "pedigree" in Julia
+ped_path = "D:\\JWASr\\data\\pedigree.txt" #please change to your local path
+get_pedigree(ped_path, separator = ',', header = TRUE)  
 ```
 You can import your own data by [read.table()](https://www.rdocumentation.org/packages/utils/versions/3.5.1/topics/read.table).
+
+Univariate Linear Mixed Model (Genomic data)
+---
 
 ### Step 3: Build Model Equations
 
 ``` r
-model_equation ="y1 = intercept + x1 + x3 + ID + dam
+model_equation1 = "y1 = intercept + x1*x3 + x2 + x3 + ID + dam";
+R = 1.0
+
+model1 = build_model(model_equation1,R) 
+```
+
+
+### Step 4: Set Factors or Covariate
+
+``` r
+set_covariate(model1, "x1")
+```
+
+
+### Step 5: Set Random or Fixed Effects
+
+``` r
+G1 = 1.0
+set_random(model1, "x2", G1)
+```
+
+
+``` r
+G2 = diag(2)
+set_random_ped(model1, "ID dam", pedigree, G2)
+```
+
+
+### Step 6: Use Genomic Information
+
+``` r
+G3 = 1.0
+geno_path = "D:/JWASr/data/genotypes.txt"  #please change to your local path
+
+add_genotypes(model1, geno_path, G3, separator=',', header = TRUE)  
+```
+
+### Step 7: Run Bayesian Analysis
+
+``` r
+outputMCMCsamples(model1, "x2")
+```
+
+``` r
+out = runMCMC(model1, data = phenotypes, methods = "BayesC", estimatePi = TRUE, 
+                     chain_length = 5000, output_samples_frequency = 100) 
+out
+```
+
+    ## $`Posterior mean of polygenic effects covariance matrix`
+    ##           [,1]      [,2]
+    ## [1,] 2.2515918 0.3201589
+    ## [2,] 0.3201589 1.7288127
+    ## 
+    ## $`Posterior mean of marker effects`
+    ##      [,1] [,2]      
+    ## [1,] "m1" -0.3528505
+    ## [2,] "m2" -0.2837558
+    ## [3,] "m3" 0.7387871 
+    ## [4,] "m4" 0.3174194 
+    ## [5,] "m5" 0.3249077 
+    ## 
+    ## $`Posterior mean of residual variance`
+    ## [1] 1.272377
+    ## 
+    ## $`Posterior mean of marker effects variance`
+    ## [1] 0.9280905
+    ## 
+    ## $`Posterior mean of location parameters`
+    ##    Trait    Effect     Level    Estimate
+    ## 1      1 intercept intercept    11.22084
+    ## 2      1     x1*x3    x1 * m    2.056661
+    ## 3      1     x1*x3    x1 * f   0.9054161
+    ## 4      1        x2         2   0.2748953
+    ## 5      1        x2         1  -0.2128133
+    ## 6      1        x3         m   -13.91094
+    ## 7      1        x3         f   -13.89881
+    ## 8      1        ID        a2   0.2053027
+    ## 9      1        ID        a1   0.2089958
+    ## 10     1        ID        a3   -0.235355
+    ## 11     1        ID        a7  0.04042069
+    ## 12     1        ID        a4  -0.3907794
+    ## 13     1        ID        a6  -0.1865815
+    ## 14     1        ID        a9  -0.2896912
+    ## 15     1        ID        a5   0.8834916
+    ## 16     1        ID       a10   0.4266387
+    ## 17     1        ID       a12  0.07726209
+    ## 18     1        ID       a11  0.04771032
+    ## 19     1        ID        a8  -0.6744953
+    ## 20     1       dam        a2   0.6520092
+    ## 21     1       dam        a1  -0.1223837
+    ## 22     1       dam        a3  -0.1084323
+    ## 23     1       dam        a7 -0.08451849
+    ## 24     1       dam        a4   0.2548246
+    ## 25     1       dam        a6  -0.4173132
+    ## 26     1       dam        a9  0.01880938
+    ## 27     1       dam        a5   0.3874218
+    ## 28     1       dam       a10   0.1851588
+    ## 29     1       dam       a12   0.1197191
+    ## 30     1       dam       a11    0.113721
+    ## 31     1       dam        a8 -0.03800705
+    ## 
+    ## $`Posterior mean of Pi`
+    ## [1] 0.3757778
+
+Multivariate Linear Mixed Model (Genomic data)
+---
+
+### Step 3: Build Model Equations
+
+``` r
+model_equation2 ="y1 = intercept + x1 + x3 + ID + dam
                   y2 = intercept + x1 + x2 + x3 + ID
                   y3 = intercept + x1 + x1*x3 + x2 + ID"
 R = diag(3)
 
-build_model(model_equation, R) #build "model" in Julia
+model2 = build_model(model_equation2, R) 
 ```
 
 ### Step 4: Set Factors or Covariate
 
 ``` r
-set_covariate("x1")
+set_covariate(model2, "x1")
 ```
 
 
@@ -42,13 +158,13 @@ set_covariate("x1")
 
 ``` r
 G1 = diag(2)
-set_random("x2",G1)
+set_random(model2, "x2", G1)
 ```
 
 
 ``` r
 G2 = diag(4)
-set_random("ID dam", G2, pedigree = TRUE)
+set_random_ped(model2, "ID dam", pedigree, G2)
 ```
 
 
@@ -56,26 +172,26 @@ set_random("ID dam", G2, pedigree = TRUE)
 
 ``` r
 G3 = diag(3)
-geno_path = "D:/JWASr/data/genotypes.txt"  #change to your local path
+geno_path = "D:/JWASr/data/genotypes.txt"  #please change to your local path
 
-add_genotypes(geno_path, G3)  #separator=',' is default
+add_genotypes(model2, geno_path, G3, separator = ',', header = TRUE)  
 ```
 
 ### Step 7: Run Bayesian Analysis
 
 ``` r
-outputMCMCsamples("x2")
+outputMCMCsamples(model2, "x2")
 ```
 
 
 ``` r
-out = runMCMC(data = phenotypes, methods = "BayesC", estimatePi = TRUE, chain_length = 5000, output_samples_frequency = 100)
+out2 = runMCMC(model2, phenotypes, methods = "BayesC", estimatePi = TRUE, chain_length = 5000, output_samples_frequency = 100)
 ```
 
 We can select specified result, for example, "Posterior mean of Pi".
 
 ``` r
- out$`Posterior mean of Pi`
+ out2$`Posterior mean of Pi`
 ```
 
     ## $`[1.0, 1.0, 0.0]`
@@ -105,7 +221,7 @@ We can select specified result, for example, "Posterior mean of Pi".
 All results
 
 ``` r
-out
+out2
 ```
 
     ## $`Posterior mean of polygenic effects covariance matrix`

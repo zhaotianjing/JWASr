@@ -4,10 +4,7 @@
 \alias{set_covariate}
 \title{Set Factors or Covariate}
 \usage{
-set_covariate(xi)
-}
-\arguments{
-\item{xi}{String}
+set_covariate(model, xi)
 }
 \description{
 Set Factors or Covariate

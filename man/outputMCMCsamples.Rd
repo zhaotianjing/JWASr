@@ -4,7 +4,7 @@
 \alias{outputMCMCsamples}
 \title{outputMCMCsamples}
 \usage{
-outputMCMCsamples(xi)
+outputMCMCsamples(model, xi)
 }
 \arguments{
 \item{xi}{String}
