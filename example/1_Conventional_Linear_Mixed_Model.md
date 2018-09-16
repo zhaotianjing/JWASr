@@ -1,4 +1,4 @@
-1. Bayesian Linear Mixed Models (conventional)
+1.\_Bayesian\_Linear\_Mixed\_Models\_(conventional)
 ================
 Tianjing Zhao
 August 26, 2018
