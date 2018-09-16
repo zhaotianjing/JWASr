@@ -1,5 +1,6 @@
 
 
+
 # JWASr
 
 ### Installation
@@ -21,7 +22,7 @@
     devtools::install_github("zhaotianjing/JWASr")
     ```
 ### Set up
-Please set up **every time** you start a new session of R. The set up time is about 10 second.
+Please set up **every time** you start a new session of R. The set up time is about 10 seconds.
 * Mac or Linux users
     ```bash
     JWASr::jwasr_setup()
@@ -36,69 +37,76 @@ Please set up **every time** you start a new session of R. The set up time is ab
     If R session aborted, please click "Start New Session" and set up again.
 
 ### Workflow
-Note, all data can be found in our subfolder named "data".
-#### Step 1: Load Package
-``` r
+Note that all data can be found in our subfolder named "data".
+
+  #### Step 1: Load Package
+```bash
 library("JWASr")
 ```
 Please make sure you've already set up.
 
+  #### Step 2: Read data
 
-#### Step 2: Read data
-``` r
+```bash
 phenotypes = phenotypes #build-in data
 
 ped_path = "D:\\JWASr\\data\\pedigree.txt" #please change to your local path
-get_pedigree(ped_path, separator = ',', header = T)  #build "pedigree" in Julia
+get_pedigree(ped_path, separator = ',', header = TRUE)  
 ```
-We create an object named "pedigree" in Julia, which contains pedigree information. 
+You can import your own data by [read.table()](https://www.rdocumentation.org/packages/utils/versions/3.5.1/topics/read.table).
+
 
 #### Step 3: Build Model Equations
-``` r
-model_equation ="y1 = intercept + x1 + x3 + ID + dam
-                  y2 = intercept + x1 + x2 + x3 + ID
-                  y3 = intercept + x1 + x1*x3 + x2 + ID"
-R = diag(3)
 
-build_model(model_equation, R) #build "model" in Julia
+```bash
+model_equation = "y1 = intercept + x1*x3 + x2 + x3 + ID + dam";
+R = 1.0
+
+model = build_model(model_equation,R) 
 ```
-We created an object named "model" in Julia, which is the model we built. The following code are based on the "model".
+
 
 #### Step 4: Set Factors or Covariate
 
-``` r
-set_covariate("x1")
+```bash
+set_covariate(model, "x1")
 ```
 
 
 #### Step 5: Set Random or Fixed Effects
 
-``` r
-G1 = diag(2)
-set_random("x2",G1)
+```bash
+G1 = 1.0
+set_random(model, "x2", G1)
 ```
 
 
-``` r
-G2 = diag(4)
-set_random("ID dam", G2, pedigree = TRUE)
+```bash
+G2 = diag(2)
+set_random_ped(model, "ID dam", pedigree, G2)
 ```
 
 
 #### Step 6: Use Genomic Information
 
-``` r
-G3 = diag(3)
+```bash
+G3 = 1.0
 geno_path = "D:/JWASr/data/genotypes.txt"  #please change to your local path
 
-add_genotypes(geno_path, G3)  #separator=',' is default
+add_genotypes(model, geno_path, G3, separator=',', header = TRUE)  
 ```
 
 #### Step 7: Run Bayesian Analysis
 
-``` r
-outputMCMCsamples("x2")
+```bash
+outputMCMCsamples(model, "x2")
 ```
+
+``` r
+out = runMCMC(model, data = phenotypes, methods = "BayesC", estimatePi = TRUE, 
+                     chain_length = 5000, output_samples_frequency = 100) 
+```
+
 
 ### For developers
 If you change any function in subfolder "R", please run `devtools::document()` in R to update the package. (under path of JWASr).
