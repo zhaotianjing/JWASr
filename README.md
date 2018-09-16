@@ -51,7 +51,7 @@ Please make sure you've already set up.
 phenotypes = phenotypes #build-in data
 
 ped_path = "D:\\JWASr\\data\\pedigree.txt" #please change to your local path
-get_pedigree(ped_path, separator = ',', header = TRUE)  
+pedigree = get_pedigree(ped_path, separator = ',', header = TRUE)  
 ```
 You can import your own data by [read.table()](https://www.rdocumentation.org/packages/utils/versions/3.5.1/topics/read.table).
 
@@ -103,7 +103,7 @@ outputMCMCsamples(model, "x2")
 ```
 
 ``` r
-out = runMCMC(model, data = phenotypes, methods = "BayesC", estimatePi = TRUE, 
+out = runMCMC(model, phenotypes, methods = "BayesC", estimatePi = TRUE, 
                      chain_length = 5000, output_samples_frequency = 100) 
 ```
 
