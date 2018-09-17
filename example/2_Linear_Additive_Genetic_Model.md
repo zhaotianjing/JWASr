@@ -18,7 +18,7 @@ phenotypes = phenotypes #build-in data
 You can import your own data by [read.table()](https://www.rdocumentation.org/packages/utils/versions/3.5.1/topics/read.table).
 ``` r
 ped_path = "D:\\JWASr\\data\\pedigree.txt"  #please change to your local path
-get_pedigree(ped_path, separator=',', header=TRUE) 
+pedigree = get_pedigree(ped_path, separator=',', header=TRUE) 
 ```
 Univariate Linear Additive Genetic Model
 ---
@@ -148,13 +148,13 @@ outputMCMCsamples(model2, "x2")
 
 
 ``` r
-out = runMCMC(data = phenotypes, chain_length = 5000, output_samples_frequency = 100, outputEBV = TRUE)   
+out2 = runMCMC(model2, phenotypes, chain_length = 5000, output_samples_frequency = 100, outputEBV = TRUE)   
 ```
 
 We can select specified result, for example, "EBV\_y2"
 
 ``` r
-out$EBV_y2
+out2$EBV_y2
 ```
 
     ##       [,1]  [,2]      
@@ -171,12 +171,12 @@ out$EBV_y2
     ## [11,] "a8"  1.38478   
     ## [12,] "a9"  1.332655
 
-Or "out[1]"
+Or "out2[1]"
 
 All results
 
 ``` r
-out
+out2
 ```
 
     ## $EBV_y2
