@@ -1,6 +1,7 @@
 
 
 
+
 # JWASr
 
 ### Installation
@@ -110,3 +111,21 @@ out = runMCMC(model, phenotypes, methods = "BayesC", estimatePi = TRUE,
 
 ### For developers
 If you change any function in subfolder "R", please run `devtools::document()` in R to update the package. (under path of JWASr).
+
+
+# JWASr_GUI
+[JWASr_GUI](https://github.com/zhaotianjing/JWASr_GUI) is a shiny app for JWASr, which provide GUI for user.
+
+### Installation
+The process is exactly same as R package [JWASr](https://github.com/zhaotianjing/JWASr), except you should also install `shiny` by `install.packages("shiny")` in R.
+
+### Usage
+There are two ways.
+*  Use in package
+	```bash
+	JWASr::runShiny()
+	```
+* Or download&use from GitHub 
+	```bash
+	shiny::runGitHub('JWASr_GUI','zhaotianjing')
+	```
