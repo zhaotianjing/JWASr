@@ -120,7 +120,7 @@ If you change any function in subfolder "R", please run `devtools::document()` i
 The process is exactly same as R package [JWASr](https://github.com/zhaotianjing/JWASr), except you should also install `shiny` by `install.packages("shiny")` in R.
 
 ### Usage
-There are two ways.
+There are two ways:
 *  Use in package
 	```bash
 	JWASr::runShiny()
