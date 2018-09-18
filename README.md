@@ -125,7 +125,3 @@ There are two ways.
 	```bash
 	JWASr::runShiny()
 	```
-* Or download&use from GitHub 
-	```bash
-	shiny::runGitHub('JWASr_GUI','zhaotianjing')
-	```
