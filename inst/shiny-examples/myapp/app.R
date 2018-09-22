@@ -16,7 +16,7 @@ ui <- fluidPage(
                         actionButton("view_data",label = "View head of data"),
                         tableOutput("table"))),
     #pedigree
-    column(8,wellPanel(fileInput("ped_file", label = HTML("Please choose your <em>pedigree</em> file:")),
+    column(8,wellPanel(fileInput("ped_file", label = HTML("<p>Please choose your <em>pedigree</em> file:</p><p>(Or leave it blank if you don't need)</p>")),
                                  checkboxInput("header_ped", "Header", TRUE),
                                  radioButtons("sep_ped","Separator :", choices = list("comma" = ",","space" = " ")),
                                  actionButton("view_ped",label = "View head of pedigree file"),
@@ -40,17 +40,17 @@ y3 = intercept + x1 + x1*x3 + x2 + ID"),textAreaInput("R_diag",label = HTML("<p>
 0,1"))),
 
     #random w/ ped
-    column(8,wellPanel(textInput("ran_ped",label = HTML("Set random with <em>pedigree</em>"),value ="ID dam"),
-                                                         textAreaInput("G2",label = HTML("<p>Enter <em>G2</em>:</p><p>Note: <em>G2</em> is a number/matrix</p>"),value ="1,0,0,0
+    column(8,wellPanel(textInput("ran_ped",label = HTML("<p>Set random with <em>pedigree</em></p><p>(Or delete to blank if you don't need)</p>"),value ="ID dam"),
+                                                         textAreaInput("G2",label = HTML("<p>Enter <em>G2</em>:</p><p>(Or delete to blank if you don't need)</p><p>Note: <em>G2</em> is a number/matrix</p>"),value ="1,0,0,0
 0,1,0,0
 0,0,1,0
 0,0,0,1"))),
 
     ###geno
-    column(8,h3("Step 6. Use Genomic Information"),wellPanel(textAreaInput("G3",label = HTML("<p>Enter <em>G3</em>:</p><p>Note: <em>G3</em> is a number/matrix</p>"),value ="1,0,0
+    column(8,h3("Step 6. Use Genomic Information"),wellPanel(textAreaInput("G3",label = HTML("<p>Enter <em>G3</em>:</p><p>(Or delete to blank if you don't need)</p><p>Note: <em>G3</em> is a number/matrix</p>"),value ="1,0,0
 0,1,0
 0,0,1"),
-      fileInput("geno_file", label = HTML("Please choose your <em>genotypes</em> file:")),
+      fileInput("geno_file", label = HTML("<p>Please choose your <em>genotypes</em> file:</p><p>(Or leave it blank if you don't need)</p>")),
                        checkboxInput("header_geno", "Header", TRUE),
                        radioButtons("sep_geno","Separator :", choices = list("comma" = ",","space" = " ")),
                        actionButton("view_geno",label = "View head of genotypes file"),
@@ -103,17 +103,21 @@ server <- function(input, output) {
     #view pedigree
     observeEvent(input$view_ped, {
       ped_file = input$ped_file
-      ped = read.csv(ped_file$datapath, header = input$header_ped, sep = input$sep_ped)
-      head_ped = head(ped)
-      output$table_ped <- renderTable(head_ped)
+      if (!is.null(ped_file$datapath)) {
+        ped = read.csv(ped_file$datapath, header = input$header_ped, sep = input$sep_ped)
+        head_ped = head(ped)
+        output$table_ped <- renderTable(head_ped)}
+      else {print("NULL input!!!")}
     })
 
     #view geno
     observeEvent(input$view_geno, {
       geno_file = input$geno_file
-      geno = read.csv(geno_file$datapath, header = input$header_geno, sep = input$sep_geno)
-      head_geno = head(geno)
-      output$table_geno <- renderTable(head_geno)
+      if (!is.null(geno_file$datapath)) {
+        geno = read.csv(geno_file$datapath, header = input$header_geno, sep = input$sep_geno)
+        head_geno = head(geno)
+        output$table_geno <- renderTable(head_geno)}
+      else {print("NULL input!!!")}
     })
 
     ###########
@@ -124,8 +128,9 @@ server <- function(input, output) {
 
       #read pedigree
       ped_file = input$ped_file
-      ped_path = ped_file$datapath
-      pedigree = get_pedigree(ped_path, separator=input$sep_ped, header=input$header_ped)
+      if (!is.null(ped_file$datapath)) {
+        ped_path = ped_file$datapath
+        pedigree = get_pedigree(ped_path, separator=input$sep_ped, header=input$header_ped)}
 
 
       equation = input$model
@@ -152,22 +157,24 @@ server <- function(input, output) {
 
       #random w/ ped
       G2_diag_str = input$G2
-      G2 = as.matrix(read.table(text = G2_diag_str, sep = ","))
-
-
       x_ran_ped_temp = input$ran_ped
-      set_random_ped(model, x_ran_ped_temp, pedigree, G2)
+      if (G2_diag_str != "" && x_ran_ped_temp != "") {
+        G2 = as.matrix(read.table(text = G2_diag_str, sep = ","))
+        set_random_ped(model, x_ran_ped_temp, pedigree, G2)}
 
 
 
 
       #read geno
       G3_diag_str = input$G3
-      G3 = as.matrix(read.table(text = G3_diag_str, sep = ","))
+      if (G3_diag_str != ""){
+        G3 = as.matrix(read.table(text = G3_diag_str, sep = ","))}
+
 
       geno_file = input$geno_file
-      geno_path = geno_file$datapath
-      add_genotypes(model, geno_path, G3, separator=input$sep_geno, header = input$header_geno)
+      if (!is.null(geno_file$datapath)) {
+        geno_path = geno_file$datapath
+        add_genotypes(model, geno_path, G3, separator=input$sep_geno, header = input$header_geno)}
 
 
 
