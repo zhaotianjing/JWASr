@@ -64,7 +64,7 @@ You can import your own data by [read.table()](https://www.rdocumentation.org/pa
 model_equation = "y1 = intercept + x1*x3 + x2 + x3 + ID + dam";
 R = 1.0
 
-model = build_model(model_equation,R) 
+model = build_model(model_equation,R)
 ```
 
 
@@ -105,8 +105,8 @@ outputMCMCsamples(model, "x2")
 ```
 
 ``` r
-out = runMCMC(model, phenotypes, methods = "BayesC", estimatePi = TRUE, 
-                     chain_length = 5000, output_samples_frequency = 100) 
+out = runMCMC(model, phenotypes, methods = "BayesC", estimatePi = TRUE,
+                     chain_length = 5000, output_samples_frequency = 100)
 ```
 
 
@@ -125,3 +125,8 @@ In R, please run:
 ```bash
 JWASr::runShiny()
 ```
+
+### To-do list
+ * script to install required packages if not installed
+ * improve GUI interface
+ * add the complete interface to JWAS.jl
