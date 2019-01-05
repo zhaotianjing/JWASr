@@ -33,7 +33,7 @@ Please set up **every time** you start a new session of R. The set up time is ab
  * Windows users
     ```bash
     # please change to your local path of libjulia.dll
-    path_libjulia = "C:/Users/ztjsw/AppData/Local/Julia-0.7.0/bin/libjulia.dll"
+    path_libjulia = "C:/Users/ztjsw/AppData/Local/Julia-1.0.1/bin/libjulia.dll"
     JWASr::jwasr_setup_win(path_libjulia)
     ```
     If R session aborted, please click "Start New Session" and set up again.
