@@ -22,7 +22,7 @@ You can import your own data by [read.table()](https://www.rdocumentation.org/pa
 JWASr_path = find.package("JWASr")                            #find the local path of JWASr
 JWASr_data_path = paste(JWASr_path,"/extdata/",sep= "")       #path for data
 ped_path = paste(JWASr_data_path,"pedigree.txt",sep = "")     #path for pedigree.txt
-geno_path = paste(JWASr_data_path,"genotype.txt",sep = "")    #path for genotype.txt
+geno_path = paste(JWASr_data_path,"genotypes.txt",sep = "")    #path for genotypes.txt
 ```
 You can also use your local data path to define `ped_path` and `geno_path`.
 ``` r
