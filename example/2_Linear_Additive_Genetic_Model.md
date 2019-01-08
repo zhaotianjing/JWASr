@@ -17,9 +17,15 @@ phenotypes = phenotypes #build-in data
 ```
 You can import your own data by [read.table()](https://www.rdocumentation.org/packages/utils/versions/3.5.1/topics/read.table).
 ``` r
-ped_path = "D:\\JWASr\\data\\pedigree.txt"  #please change to your local path
+JWASr_path = find.package("JWASr")                            #find the local path of JWASr
+JWASr_data_path = paste(JWASr_path,"/extdata/",sep= "")       #path for data
+ped_path = paste(JWASr_data_path,"pedigree.txt",sep = "")     #path for pedigree.txt
+```
+You can also use your local data path to define `ped_path`.
+``` r
 pedigree = get_pedigree(ped_path, separator=',', header=TRUE) 
 ```
+
 Univariate Linear Additive Genetic Model
 ---
 ### Step 3: Build Model Equations

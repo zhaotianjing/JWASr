@@ -16,11 +16,20 @@ Please make sure you've already set up.
 
 ``` r
 phenotypes = phenotypes #build-in data
-
-ped_path = "D:\\JWASr\\data\\pedigree.txt" #please change to your local path
-pedigree = get_pedigree(ped_path, separator = ',', header = TRUE)  
 ```
 You can import your own data by [read.table()](https://www.rdocumentation.org/packages/utils/versions/3.5.1/topics/read.table).
+``` r
+JWASr_path = find.package("JWASr")                            #find the local path of JWASr
+JWASr_data_path = paste(JWASr_path,"/extdata/",sep= "")       #path for data
+ped_path = paste(JWASr_data_path,"pedigree.txt",sep = "")     #path for pedigree.txt
+geno_path = paste(JWASr_data_path,"genotype.txt",sep = "")    #path for genotype.txt
+```
+You can also use your local data path to define `ped_path` and `geno_path`.
+``` r
+pedigree = get_pedigree(ped_path, separator=',', header=TRUE) 
+```
+
+
 
 Univariate Linear Mixed Model (Genomic data)
 ---
@@ -60,8 +69,6 @@ set_random_ped(model1, "ID dam", pedigree, G2)
 
 ``` r
 G3 = 1.0
-geno_path = "D:/JWASr/data/genotypes.txt"  #please change to your local path
-
 add_genotypes(model1, geno_path, G3, separator=',', header = TRUE)  
 ```
 
@@ -172,8 +179,6 @@ set_random_ped(model2, "ID dam", pedigree, G2)
 
 ``` r
 G3 = diag(3)
-geno_path = "D:/JWASr/data/genotypes.txt"  #please change to your local path
-
 add_genotypes(model2, geno_path, G3, separator = ',', header = TRUE)  
 ```
 
